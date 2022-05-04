@@ -16,12 +16,12 @@ export class AppComponent {
   xmlExtensions: any[] = ['.xml'];
   xlsxExtensions: any[] = ['.xlsx', '.xls', '.csv'];
 
-  form: any = this.fb.group({
+  form: FormGroup = this.fb.group({
     name: ['', Validators.required],
-    img_file: ['', [Validators.required, requiredFileType(this.imgExtensions)]],
-    pdf_file: ['', [Validators.required, requiredFileType(this.pdfExtensions), maxSizeFile(5242880)]],
-    xml_file: ['', requiredFileType(this.xmlExtensions)],
-    xlsx_file: ['', requiredFileType(this.xlsxExtensions)],
+    img_file: [null, [Validators.required, requiredFileType(this.imgExtensions)]],
+    pdf_file: [null, [Validators.required, requiredFileType(this.pdfExtensions), maxSizeFile(5242880)]],
+    xml_file: [null, requiredFileType(this.xmlExtensions)],
+    xlsx_file: [null, requiredFileType(this.xlsxExtensions)],
   });
 
   constructor(
@@ -29,9 +29,28 @@ export class AppComponent {
     private http: HttpClient
   ) { }
 
+  removeFile(type: string) {
+    switch (type) {
+      case 'img_file':
+        this.form.get('img_file')?.reset(null);
+        break;
+      case 'pdf_file':
+        this.form.get('pdf_file')?.reset(null);
+        break;
+      case 'xml_file':
+        this.form.get('xml_file')?.reset(null);
+        break;
+      case 'xlsx_file':
+        this.form.get('xlsx_file')?.reset(null);
+        break;
+      default:
+        break;
+    }
+  }
+
   submit() {
-    console.log(this.form.value);
-    console.log(toFormData(this.form.value));
+    console.log('hfbsebfsehfsehjbfhjbsefhjse',this.form.value);
+    // console.log(toFormData(this.form.value));
     // this.http.post('apiiiii', toFormData(this.form.value)).subscribe(res => {
     //   console.log('respuestaaaaa',res);
     // });

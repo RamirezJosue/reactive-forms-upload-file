@@ -26,7 +26,7 @@ export class FileUploadComponent {
 
   constructor(private host: ElementRef<HTMLInputElement>){}
 
-  writeValue(value: null) {
+  writeValue(value?: null) {
     // Limpiar archivo del input
     this.host.nativeElement.value = '';
     this.file = null;
