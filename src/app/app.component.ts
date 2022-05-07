@@ -10,7 +10,7 @@ import { requiredFileType, maxSizeFile } from './upload-file-validators';
 })
 export class AppComponent {
 
-  imgExtensions: any[] = ['.jpeg', '.png', '.jpg', '.svg'];
+  imgExtensions: any[] = ['.jpeg', '.png', '.jpg', '.svg', '.web'];
   pdfExtensions: any[] = ['.pdf'];
   textExtensions: any[] = ['.plain'];
   xmlExtensions: any[] = ['.xml'];
@@ -21,7 +21,7 @@ export class AppComponent {
     img_file: [null, [Validators.required, requiredFileType(this.imgExtensions)]],
     pdf_file: [null, [Validators.required, requiredFileType(this.pdfExtensions), maxSizeFile(5242880)]],
     xml_file: [null, requiredFileType(this.xmlExtensions)],
-    xlsx_file: [null, requiredFileType(this.xlsxExtensions)],
+    xlsx_file: [null, requiredFileType(this.xlsxExtensions)]
   });
 
   constructor(
@@ -49,11 +49,11 @@ export class AppComponent {
   }
 
   submit() {
-    console.log('hfbsebfsehfsehjbfhjbsefhjse',this.form.value);
-    // console.log(toFormData(this.form.value));
-    // this.http.post('apiiiii', toFormData(this.form.value)).subscribe(res => {
-    //   console.log('respuestaaaaa',res);
-    // });
+    // console.log('hfbsebfsehfsehjbfhjbsefhjse',this.form.value);
+    console.log(this.form.value);
+    this.http.post('https://drive.google.com/drive/folders/1-DGEKyTI_hsXqoa2N_kcyQc4tgXddN9F', toFormData(this.form.value)).subscribe(res => {
+      console.log('respuestaaaaa',res);
+    });
   }
 
   hasError(field: string, error: string) {

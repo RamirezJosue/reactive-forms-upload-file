@@ -8,15 +8,15 @@
         <ng-container *ngIf="hasError('name', 'required')">This field is required</ng-container>
       </div>
     </div>
-    <div>
-      <app-file-upload formControlName="img_file" [accept]="imgExtensions"></app-file-upload>
-      <button *ngIf="form.get('img_file')?.value" class="btn btn-danger" (click)="removeFile('img_file')">Limpiar</button>
-      <div class="invalid-feedback" style="display: block">
-        <ng-container *ngIf="hasError('img_file', 'required')">Este campo es obligatorio</ng-container>
-        <ng-container *ngIf="hasError('img_file', 'requiredFileType')">Archivo invalido</ng-container>
-      </div>
+
+    <div class="files-container">
+      <app-file-upload formControlName="img_file" [accept]="imgExtensions" (remove)="removeFile('img_file')"></app-file-upload>
+      <app-file-upload formControlName="pdf_file" [accept]="pdfExtensions" (remove)="removeFile('pdf_file')"></app-file-upload>
+      <app-file-upload formControlName="xml_file" [accept]="xmlExtensions" (remove)="removeFile('xml_file')"></app-file-upload>
+      <app-file-upload formControlName="xlsx_file" [accept]="xlsxExtensions" (remove)="removeFile('xlsx_file')"></app-file-upload>
     </div>
-    <div>
+
+    <!-- <div>
       <app-file-upload formControlName="pdf_file" [accept]="pdfExtensions"></app-file-upload>
       <button class="btn btn-danger" *ngIf="form.get('pdf_file')?.value" (click)="removeFile('pdf_file')">Limpiar</button>
       <div class="invalid-feedback" style="display: block">
@@ -24,8 +24,8 @@
         <ng-container *ngIf="hasError('pdf_file', 'requiredFileType')">Archivo invalido</ng-container>
         <ng-container *ngIf="hasError('pdf_file', 'maxSizeFile')">Muy pesado</ng-container>
       </div>
-    </div>
-    <div>
+    </div> -->
+    <!-- <div>
       <app-file-upload formControlName="xml_file" [accept]="xmlExtensions"></app-file-upload>
       <button class="btn btn-danger" *ngIf="form.get('xml_file')?.value" (click)="removeFile('xml_file')">Limpiar</button>
       <div class="invalid-feedback" style="display: block">
@@ -39,6 +39,13 @@
         <ng-container *ngIf="hasError('xlsx_file', 'requiredFileType')">Archivo invalido</ng-container>
       </div>
     </div>
+    <div>
+      <app-file-upload formControlName="prueba" [accept]="xlsxExtensions"></app-file-upload>
+      <button class="btn btn-danger" *ngIf="form.get('prueba')?.value" (click)="removeFile('prueba')">Limpiar</button>
+      <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="hasError('prueba', 'requiredFileType')">Archivo invalido</ng-container>
+      </div>
+    </div> -->
     <button [disabled]="form.invalid" (click)="submit()" class="btn btn-primary">Guardar</button>
   </form>
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,19 +15,24 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class FileUploadComponent {
   @Input() accept: any[] = [];
+  @Output() remove = new EventEmitter<boolean>();
   onChange!: Function;
   public file: File | null = null;
+
+  isFile: boolean = true;
 
   @HostListener('change', ['$event.target.files']) emitFiles(event: FileList) {
     const file = event && event.item(0);
     this.onChange(file);
     this.file = file;
+    this.isFile = false;
   }
 
   constructor(private host: ElementRef<HTMLInputElement>){}
 
   writeValue(value?: null) {
     // Limpiar archivo del input
+    this.isFile = true;
     this.host.nativeElement.value = '';
     this.file = null;
   }
@@ -37,6 +42,9 @@ export class FileUploadComponent {
   }
 
   registerOnTouched(fn: Function) {
+  }
 
+  onRemove() {
+    this.remove.emit(true);
   }
 }

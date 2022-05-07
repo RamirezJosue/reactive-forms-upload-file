@@ -1,5 +1,23 @@
-<div class="file-drop-area">
-  <span class="fake-btn">Seleccione archivo</span>
-  <span class="file-msg">{{file ? file.name : 'Arrastre y suelte el archivo aquí' }}</span>
-  <input class="file-input" type="file" [accept]="accept">
+<div class="file">
+  <ng-container *ngIf="isFile">
+    <p class="nb-text-primary bd-highlight"><small>PDF</small></p>
+    <div class="upload mb-4" style="border: dashed 0.5px #000;">
+      <input type="file" style="cursor: pointer;" [accept]="accept">
+      <i class="fa-solid fa-file-pdf icon" ></i>
+      <button class="mt-2 btn btn-primary btn-sm" style="position: absolute;">
+        Examinar
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isFile">
+    <p class="nb-text-primary bd-highlight"> <small>Nombre</small></p>
+    <div class="upload mb-4" style="border: 1px solid #000;">
+      <a style="position: absolute; right: 0; " href="javascript:;" (click)="onRemove()">
+        <i class="fa-solid fa-x" style="color: red;"></i>
+      </a>
+      <i class="fa-solid fa-check icon" style="color: green;"></i>
+      <button class="mt-2" style="position: absolute;" class="mt-2 btn btn-primary btn-sm">Visualizar</button>
+    </div>
+  </ng-container>
 </div>
